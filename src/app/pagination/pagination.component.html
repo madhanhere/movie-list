@@ -1,0 +1,5 @@
+<mat-paginator *ngIf="!!results" [length]="totlaPages"
+[pageSize]="20"
+[pageSizeOptions]="pageSizeOptions"
+(page)="listenToPageChange($event)">
+</mat-paginator>

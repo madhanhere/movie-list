@@ -1,0 +1,33 @@
+<div class="login-container">
+  <form #form="ngForm" [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="login-form">
+      <h2>Login</h2>
+
+      <input class="mt-2" type="email" maxlength="256" placeholder="Email" formControlName="email" />
+
+      <ng-container *ngIf="loginForm.get('email').invalid && (loginForm.get('email').dirty || form.submitted)">
+        <div *ngIf="loginForm.get('email').hasError('required')"
+          class="input-error mt-1">
+          Email is required
+        </div>
+        <div *ngIf="loginForm.get('email').hasError('pattern')"
+          class="input-error mt-1">
+          Email is invalid
+        </div>
+      </ng-container>
+
+      <input class="mt-2" type="password" placeholder="Password" formControlName="password" />
+
+      <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || form.submitted)"
+        class="input-error mt-1">
+        Password is required
+      </div>
+
+      <div *ngIf="!!loginErrorMessage" class="input-error">
+        <p>{{loginErrorMessage}}</p>
+      </div>
+      
+      <button type="submit" class="mt-2">Login</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,26 @@
+.movie-container {
+    background-color: #fff;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
+    height: 300px;
+    
+    img {
+        border-radius: 4px 4px 0px 0px;
+    }
+
+    .no-image {
+        align-items: center;
+        background-color: azure;
+        height: 190px;
+        justify-content: center;
+    }
+    
+    .details {
+        padding: 8px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+}

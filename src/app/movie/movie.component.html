@@ -1,0 +1,17 @@
+<div class="flex-y movie-container">
+    <img *ngIf="!!movie?.backdrop_path; else noImage"
+        [src]="movie?.backdrop_path | image" alt="movie image">
+    <ng-template #noImage>
+        <div class="no-image flex-x">
+            <p>Image not available</p>
+        </div>
+    </ng-template>
+
+    <div class="flex-y details">
+        <p class="title">{{movie?.original_title}}</p>
+        <p>Popularity: {{movie?.popularity | number:'1.0-0'}}</p>
+        <p *ngIf="movie?.release_date">Release: {{movie?.release_date | date : 'mediumDate'}}</p>
+        <p >Genre: {{ (movie?.genre_ids || []) | genre : genres}}</p>
+    </div>
+
+</div>

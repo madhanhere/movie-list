@@ -1,0 +1,19 @@
+<div class="filter-section flex-x">
+    <div class="controls">
+        <div (click)="goHome()" class="cursor-pointer flex-x align-items-center">
+            <img src="/assets/home.png">
+            <p class="ml-1">Home</p>
+        </div>
+        <!-- <a href="/home">Home</a> -->
+    </div>
+    <div class="flex-x search">
+        <form [formGroup]="searchForm">
+            <input type="text" class="icon" placeholder="search" formControlName="search">
+        </form>
+    </div>
+    <div class="logout flex-x">
+        <div (click)="logout()" class="cursor-pointer flex-x align-items-center">
+            <img src="/assets/logout.png">
+        </div>
+    </div>
+</div>
