@@ -1,5 +1,13 @@
-<div class="flex-x justify-content-end mr-4">
-    <span class="mr-1"><strong>Sort By</strong></span>
-    <span class="mr-1 cursor-pointer" (click)="sortBy.emit('release_date.desc')">Date</span>
-    <span class="mr-1 cursor-pointer" (click)="sortBy.emit('popularity.desc')">Popularity</span>
+<div class="controls-wrap flex-x justify-content-end mr-4">
+    <button mat-button (click)="sortDate()">
+        <mat-icon *ngIf="showDateDesc">keyboard_arrow_up</mat-icon>
+        <mat-icon *ngIf="!showDateDesc">keyboard_arrow_down</mat-icon>
+        Date
+    </button>
+
+    <button mat-button (click)="sortByPopularity()">
+        <mat-icon *ngIf="showPopularityDesc">keyboard_arrow_up</mat-icon>
+        <mat-icon *ngIf="!showPopularityDesc">keyboard_arrow_down</mat-icon>
+        Popularity
+    </button>
 </div>

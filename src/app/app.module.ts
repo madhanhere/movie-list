@@ -16,6 +16,8 @@ import { ImagePipe } from './pipes/image.pipe';
 import { HeaderComponent } from './header/header.component';
 import { FilterComponent } from './filter/filter.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    MatButtonModule,
+    MatIconModule,
     MatPaginatorModule,
     ReactiveFormsModule,
   ],
