@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Genres } from '../types/Genres';
 
 @Component({
   selector: 'app-filter',
@@ -9,8 +10,11 @@ export class FilterComponent implements OnInit {
 
   showDateDesc: boolean = true;
   showPopularityDesc: boolean = true;
+  selectedGenre: string = '';
 
+  @Input() genres: Genres[] = [];
   @Output() sortBy: EventEmitter<string> = new EventEmitter<string>();
+  @Output() searchByGenre: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
@@ -35,6 +39,11 @@ export class FilterComponent implements OnInit {
     } else {
       this.sortBy.emit('popularity.asc');
     }
+  }
+
+  selectGenre(genre: Genres) {
+    this.selectedGenre = genre.name;
+    this.searchByGenre.emit(genre.id?.toString()); 
   }
 
 }

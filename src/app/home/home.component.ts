@@ -13,12 +13,13 @@ import { Movie } from '../types/Movie';
 })
 export class HomeComponent implements OnInit {
 
-  genreResponse: Genres[] | undefined = [];
+  genreResponse: Genres[] = [];
   isSearchInBackground: boolean = false;
   moviePath: string = 'movie/popular';
   movieResponse: ApiResponse<Movie[]> | undefined;
   page: number = 1;
   sortByKey: string = '';
+  byGenre: string = '';
 
   constructor(
     private movieService: MoviceService,
@@ -51,7 +52,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAllMovies() {
-    this.movieService.getAllMovies(this.moviePath, this.page, this.sortByKey).subscribe(
+    this.movieService.getAllMovies(this.moviePath, this.page, this.sortByKey, this.byGenre).subscribe(
       (response: ApiResponse<Movie[]>) => {
         this.movieResponse = response;
       }
@@ -85,6 +86,13 @@ export class HomeComponent implements OnInit {
   sortBy(query: string) {
     console.log(query);
     this.sortByKey = query;
+    this.moviePath = 'discover/movie';
+    this.page = 1;
+    this.getAllMovies();
+  }
+
+  moviesByGenre(genre: string) {
+    this.byGenre = genre;
     this.moviePath = 'discover/movie';
     this.page = 1;
     this.getAllMovies();

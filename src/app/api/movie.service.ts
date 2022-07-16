@@ -18,10 +18,14 @@ export class MoviceService {
         return this.http.get(`search/movie?query=${searchQuery}`);
     }
 
-    getAllMovies(path: string = "movie/popular", page: number = 1, sortBy?: string): Observable<ApiResponse<Movie[]>> {
+    getAllMovies(path: string = "movie/popular", page: number = 1, sortBy?: string, byGenre?: string): Observable<ApiResponse<Movie[]>> {
         let query = `${path}?page=${page}`;
         if (sortBy) {
             query += `&sort_by=${sortBy}`
+        }
+
+        if (byGenre) {
+            query +=`&with_genres=${byGenre}`
         }
         return this.http.get(`${query}`);
     }
