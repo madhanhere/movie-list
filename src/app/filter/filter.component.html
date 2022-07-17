@@ -1,24 +1,59 @@
-<div class="controls-wrap flex-x justify-content-end mr-4">
-    <button mat-button (click)="sortDate()">
-        <mat-icon *ngIf="showDateDesc">keyboard_arrow_up</mat-icon>
-        <mat-icon *ngIf="!showDateDesc">keyboard_arrow_down</mat-icon>
-        Date
-    </button>
-
-    <button mat-button (click)="sortByPopularity()">
-        <mat-icon *ngIf="showPopularityDesc">keyboard_arrow_up</mat-icon>
-        <mat-icon *ngIf="!showPopularityDesc">keyboard_arrow_down</mat-icon>
-        Popularity
-    </button>
-
-    <button mat-button [matMenuTriggerFor]="menu">
-        {{!selectedGenre ? 'Genres' : 'Genre: ' + selectedGenre}}
-        <mat-icon *ngIf="!selectedGenre">list</mat-icon>
-    </button>
+<div class="controls-wrap flex-x">
     <mat-menu #menu="matMenu" class="transparent">
-    <button *ngFor="let genre of genres" mat-menu-item (click)="selectGenre(genre)">{{genre.name}}</button>
-    
+        <button *ngFor="let genre of genres" mat-menu-item (click)="selectGenre(genre)">{{genre.name}}</button>
     </mat-menu>
 
-    <button *ngIf="!!showReset" mat-button (click)="resetSearch()">Reset</button>
+    <div class="medium-and-large-display flex-x">
+        <button mat-button class="mr-1" [matMenuTriggerFor]="menu">
+            {{!selectedGenre ? 'Genres' : 'Genre: ' + selectedGenre}}
+            <mat-icon *ngIf="!selectedGenre">list</mat-icon>
+        </button>
+        
+        
+        <button mat-button class="mr-1" (click)="sortDate()">
+            Date
+            <mat-icon *ngIf="showDateDesc">keyboard_arrow_up</mat-icon>
+            <mat-icon *ngIf="!showDateDesc">keyboard_arrow_down</mat-icon>
+        </button>
+    
+        <button mat-button class="mr-1" (click)="sortByPopularity()">
+            Popularity
+            <mat-icon *ngIf="showPopularityDesc">keyboard_arrow_up</mat-icon>
+            <mat-icon *ngIf="!showPopularityDesc">keyboard_arrow_down</mat-icon>
+        </button>
+    
+        <button *ngIf="!!showReset" mat-button (click)="resetSearch()">Reset</button>
+    </div>
+
+    <div class="small-display flex-y">
+        <div class="flex-x justify-content-space-between">
+            <div>
+                <button mat-button [matMenuTriggerFor]="menu">
+                    {{!selectedGenre ? 'Genres' : 'Genre: ' + selectedGenre}}
+                    <mat-icon *ngIf="!selectedGenre">list</mat-icon>
+                </button>        
+            </div>
+            <div>
+                <button mat-button class="mr-1" (click)="sortDate()">
+                    Date
+                    <mat-icon *ngIf="showDateDesc">keyboard_arrow_up</mat-icon>
+                    <mat-icon *ngIf="!showDateDesc">keyboard_arrow_down</mat-icon>
+                </button>
+            
+                <button mat-button (click)="sortByPopularity()">
+                    Popularity
+                    <mat-icon *ngIf="showPopularityDesc">keyboard_arrow_up</mat-icon>
+                    <mat-icon *ngIf="!showPopularityDesc">keyboard_arrow_down</mat-icon>
+                </button>
+            
+            </div>
+        </div>
+        <div class="flex-x justify-content-end mt-1">
+            <button *ngIf="!!showReset" mat-button (click)="resetSearch()">Reset Filters</button>            
+        </div>
+
+    </div>
+
 </div>
+
+

@@ -1,4 +1,33 @@
 .controls-wrap {
-    align-items: center
+    align-items: center;
+    justify-content: end;
+    margin-bottom: 10px;
+    padding: 0 1em 0 1em;
+
+    .small-display {
+        display: none;
+    }
+
+    ::ng-deep {
+        .mat-button {
+            border: 1px solid black;
+            padding-bottom: 4px;
+            height: 35px;
+        }
+    }
+  
+      @media screen and (max-width: 480px) {
+        ::ng-deep .mat-button {
+            // width: 100px;
+            font-size: 10px;
+        }
+        .medium-and-large-display {
+            display: none;
+        }
+        .small-display {
+            display: flex;
+            flex: 1;
+        }
+      }
 
 }
