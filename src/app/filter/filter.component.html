@@ -1,9 +1,4 @@
 <div class="controls-wrap flex-x justify-content-end mr-4">
-    <button mat-button [matMenuTriggerFor]="menu">{{!selectedGenre ? 'Select By Genre' : 'Genre: ' + selectedGenre}}</button>
-    <mat-menu #menu="matMenu" class="transparent">
-    <button *ngFor="let genre of genres" mat-menu-item (click)="selectGenre(genre)">{{genre.name}}</button>
-    
-    </mat-menu>
     <button mat-button (click)="sortDate()">
         <mat-icon *ngIf="showDateDesc">keyboard_arrow_up</mat-icon>
         <mat-icon *ngIf="!showDateDesc">keyboard_arrow_down</mat-icon>
@@ -15,4 +10,15 @@
         <mat-icon *ngIf="!showPopularityDesc">keyboard_arrow_down</mat-icon>
         Popularity
     </button>
+
+    <button mat-button [matMenuTriggerFor]="menu">
+        {{!selectedGenre ? 'Genres' : 'Genre: ' + selectedGenre}}
+        <mat-icon *ngIf="!selectedGenre">list</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="transparent">
+    <button *ngFor="let genre of genres" mat-menu-item (click)="selectGenre(genre)">{{genre.name}}</button>
+    
+    </mat-menu>
+
+    <button *ngIf="!!showReset" mat-button (click)="resetSearch()">Reset</button>
 </div>

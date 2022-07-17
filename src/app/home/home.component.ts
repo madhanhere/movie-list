@@ -5,6 +5,7 @@ import { MoviceService } from '../api/movie.service';
 import { ApiResponse } from '../types/ApiResponse';
 import { Genres } from '../types/Genres';
 import { Movie } from '../types/Movie';
+import { MovieQuery } from '../types/MovieQuery';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +16,13 @@ export class HomeComponent implements OnInit {
 
   genreResponse: Genres[] = [];
   isSearchInBackground: boolean = false;
-  moviePath: string = 'movie/popular';
   movieResponse: ApiResponse<Movie[]> | undefined;
-  page: number = 1;
-  sortByKey: string = '';
-  byGenre: string = '';
+  movieQuery: MovieQuery = {
+    field: '',
+    genre: '',
+    page: 1,
+    path: 'movie/popular'
+  };
 
   constructor(
     private movieService: MoviceService,
@@ -30,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   pageChange(pageIndex: number) {
-    this.page = pageIndex + 1;
+    this.movieQuery.page = pageIndex + 1;
     this.getAllMovies();
   }
 
@@ -38,7 +41,7 @@ export class HomeComponent implements OnInit {
     this.isSearchInBackground = true;
     try {
       forkJoin([
-        this.movieService.getAllMovies(this.moviePath, this.page),
+        this.movieService.getAllMovies(this.movieQuery),
         this.movieService.getGenres(),
       ]).subscribe(([moviesResponse, genreResponse]) => {
         this.isSearchInBackground = false;
@@ -52,7 +55,7 @@ export class HomeComponent implements OnInit {
   }
 
   getAllMovies() {
-    this.movieService.getAllMovies(this.moviePath, this.page, this.sortByKey, this.byGenre).subscribe(
+    this.movieService.getAllMovies(this.movieQuery).subscribe(
       (response: ApiResponse<Movie[]>) => {
         this.movieResponse = response;
       }
@@ -62,11 +65,10 @@ export class HomeComponent implements OnInit {
   }
 
   searchMovies(search: string) {
-
     if (!search) {
-      this.page = 1;
-      this.moviePath = 'movie/popular';
-      this.sortByKey = '';
+      this.movieQuery.page = 1;
+      this.movieQuery.path = 'movie/popular';
+      this.movieQuery.field = '';
       this.getAllMovies();
       return;
     }
@@ -84,17 +86,24 @@ export class HomeComponent implements OnInit {
   }
 
   sortBy(query: string) {
-    console.log(query);
-    this.sortByKey = query;
-    this.moviePath = 'discover/movie';
-    this.page = 1;
+    this.movieQuery.field = query;
+    this.movieQuery.path = 'discover/movie';
+    this.movieQuery.page = 1;
     this.getAllMovies();
   }
 
   moviesByGenre(genre: string) {
-    this.byGenre = genre;
-    this.moviePath = 'discover/movie';
-    this.page = 1;
+    this.movieQuery.genre = genre;
+    this.movieQuery.path = 'discover/movie';
+    this.movieQuery.page = 1;
+    this.getAllMovies();
+  }
+
+  reset() {
+    this.movieQuery.path = 'movie/popular';
+    this.movieQuery.page = 1;
+    this.movieQuery.genre = '';
+    this.movieQuery.field = '';
     this.getAllMovies();
   }
 

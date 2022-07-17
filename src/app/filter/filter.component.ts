@@ -11,10 +11,12 @@ export class FilterComponent implements OnInit {
   showDateDesc: boolean = true;
   showPopularityDesc: boolean = true;
   selectedGenre: string = '';
+  showReset: boolean = false;
 
   @Input() genres: Genres[] = [];
   @Output() sortBy: EventEmitter<string> = new EventEmitter<string>();
   @Output() searchByGenre: EventEmitter<string> = new EventEmitter<string>();
+  @Output() reset: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() { }
 
@@ -22,6 +24,7 @@ export class FilterComponent implements OnInit {
   }
 
   sortDate() {
+    this.showReset = true;
     this.showDateDesc = !this.showDateDesc;
     
     if (this.showDateDesc) {
@@ -32,6 +35,7 @@ export class FilterComponent implements OnInit {
   }
 
   sortByPopularity() {
+    this.showReset = true;
     this.showPopularityDesc = !this.showPopularityDesc;
 
     if (this.showDateDesc) {
@@ -42,8 +46,17 @@ export class FilterComponent implements OnInit {
   }
 
   selectGenre(genre: Genres) {
+    this.showReset = true;
     this.selectedGenre = genre.name;
     this.searchByGenre.emit(genre.id?.toString()); 
+  }
+
+  resetSearch(): void {
+    this.showReset = false;
+    this.showDateDesc = true;
+    this.showPopularityDesc = true;
+    this.selectedGenre = '';
+    this.reset.emit();
   }
 
 }

@@ -2,7 +2,7 @@
     
     <app-header (result)="searchMovies($event)"></app-header>
     
-    <app-filter (sortBy)="sortBy($event)" (searchByGenre)="moviesByGenre($event)" [genres]="genreResponse"></app-filter>
+    <app-filter (sortBy)="sortBy($event)" (searchByGenre)="moviesByGenre($event)" (reset)="reset()" [genres]="genreResponse"></app-filter>
     
     <div class="movie-list">    
         <ng-container *ngIf="!isSearchInBackground">
